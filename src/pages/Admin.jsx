@@ -43,7 +43,7 @@ function Admin() {
 
     // fetch winners
     const fetchWinners = async () => {
-        const { data } = await supabase
+        const { data, error } = await supabase
             .from("winners")
             .select(`
     *,
@@ -52,6 +52,10 @@ function Admin() {
 
         console.log("WINNERS DATA:", data);
         console.log("WINNERS ERROR:", error);
+        if (error) {
+            setWinners([]);
+            return;
+        }
         // const { data } = await supabase
         //     .from("winners")
         //     .select("*");
@@ -90,9 +94,9 @@ function Admin() {
 
     // run draw
     const handleRunDraw = async () => {
-        // const numbers = generateDrawNumbers();
+        const numbers = generateDrawNumbers();
 
-        const numbers = [10, 20, 30, 40, 5];
+        // const numbers = [10, 20, 30, 40, 5];
 
         const { data: drawData } = await supabase
             .from("draws")
@@ -304,7 +308,7 @@ function Admin() {
                     <tbody>
                         {(winners || []).map((w) => (
                             <tr key={w.id}>
-                                <td>{w.profiles?.name || "Unknown"}</td><td>{w.user_id.slice(0, 6)}...</td>
+                                <td>{w.profiles?.name || "Unknown"}</td>
                                 <td>{w.match_count}</td>
                                 <td>₹{w.prize_amount}</td>
 
