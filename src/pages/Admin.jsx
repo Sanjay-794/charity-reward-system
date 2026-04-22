@@ -53,7 +53,7 @@ function Admin() {
         //     .from("winners")
         //     .select("*");
 
-        setWinners(data);
+        setWinners(data || []);
     };
 
     const fetchUsers = async () => {
@@ -61,7 +61,7 @@ function Admin() {
             .from("profiles")
             .select("*");
 
-        setUsers(data);
+        setUsers(data || []);
     };
     // fetch latest draw
     const fetchLatestDraw = async () => {
@@ -299,7 +299,7 @@ function Admin() {
                     </thead>
 
                     <tbody>
-                        {winners.map((w) => (
+                        {(winners || []).map((w) => (
                             <tr key={w.id}>
                                 <td>{w.profiles?.name || "Unknown"}</td><td>{w.user_id.slice(0, 6)}...</td>
                                 <td>{w.match_count}</td>
@@ -361,7 +361,7 @@ function Admin() {
                     </thead>
 
                     <tbody>
-                        {users.map((u) => (
+                        {(users || []).map((u) => (
                             <tr key={u.id}>
                                 <td>{u.name}</td>
 
