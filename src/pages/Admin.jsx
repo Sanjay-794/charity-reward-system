@@ -49,6 +49,9 @@ function Admin() {
     *,
     profiles ( name )
   `);
+
+        console.log("WINNERS DATA:", data);
+        console.log("WINNERS ERROR:", error);
         // const { data } = await supabase
         //     .from("winners")
         //     .select("*");
